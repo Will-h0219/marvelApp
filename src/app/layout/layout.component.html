@@ -7,25 +7,15 @@
     [@onSidenavChange]="sidenavState() ? 'open' : 'close'"
   >
     <div class="menu">
-
-      <div class="top-menu">
-        <div class="menu-item">
-          <mat-icon fontIcon="person" class="menu-item-icon"></mat-icon>
-          <h2 class="menu-item-title">Characters</h2>
-        </div>
-
-        <div class="menu-item">
-          <mat-icon fontIcon="book" class="menu-item-icon"></mat-icon>
-          <h2 class="menu-item-title">Comics</h2>
-        </div>
-      </div>
-
-      <div class="bottom-menu">
-        <div class="menu-item">
-          <mat-icon fontIcon="settings" class="menu-item-icon"></mat-icon>
-          <h2 class="menu-item-title">Settings</h2>
-        </div>
-      </div>
+      @for(route of routes; track route.path; let last = $last) {
+        <a [routerLink]="[ '/', route.path ]"
+          [ngClass]="{'settings': route.path === 'settings'}"
+          class="menu-item"
+        >
+          <mat-icon [fontIcon]="route.icon" class="menu-item-icon"></mat-icon>
+          {{ route.title }}
+        </a>
+      }
     </div>
   </mat-sidenav>
 
